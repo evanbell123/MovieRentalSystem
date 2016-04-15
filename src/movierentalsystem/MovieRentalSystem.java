@@ -112,7 +112,7 @@ public class MovieRentalSystem {
         for (int i = 0; i < totalMovies; i++) {
             for (int j = 0; j < dvdsPerMovie; j++) {
                 Boolean lost = false;
-                if ((i+j) % lostDvdsRatio == 0) {
+                if (dvdCount % lostDvdsRatio == 0) {
                     lost = true;
                 }
                 dvds.put(dvdCount, new DVD(UUID.randomUUID().toString(), lost, i));
