@@ -12,6 +12,7 @@ import java.util.LinkedList;
  * @author evanb
  */
 public class Movie {
+
     private final MovieRating rating;
     private final Genre genre;
     private final int year;
@@ -30,19 +31,28 @@ public class Movie {
 
     @Override
     public String toString() {
-        String movieString = "Movie{" + "rating=" + rating + ", genre=" + genre + ", year=" + year + ", name=" + name + ", actors=[" ;
-        
-        
+        String movieString = "Movie{" + "rating=" + rating + ", genre=" + genre + ", year=" + year + ", name=" + name + ", actors=[";
+
         for (int i = 0; i < actors.size(); i++) {
-            movieString += actors.get(i).getName() + ", ";
+            movieString += actors.get(i).getName();
+            if (i != actors.size() - 1) {
+                movieString += ", ";
+            } else {
+                movieString += "] ";
+            }
         }
-        
-        movieString += "], keywords=[";
-        
+
+        movieString += ", keywords=[";
+
         for (int i = 0; i < keywords.size(); i++) {
-            movieString += keywords.get(i).getName() + ", ";
+            movieString += keywords.get(i).getName();
+            if (i != keywords.size() - 1) {
+                movieString += ", ";
+            } else {
+                movieString += "] ";
+            }
         }
-        
+
         return movieString;
     }
 }
