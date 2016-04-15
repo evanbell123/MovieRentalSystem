@@ -28,7 +28,21 @@ public class Movie {
         this.keywords = keywords;
     }
 
-    
-    
-    
+    @Override
+    public String toString() {
+        String movieString = "Movie{" + "rating=" + rating + ", genre=" + genre + ", year=" + year + ", name=" + name + ", actors=[" ;
+        
+        
+        for (int i = 0; i < actors.size(); i++) {
+            movieString += actors.get(i).getName() + ", ";
+        }
+        
+        movieString += "], keywords=[";
+        
+        for (int i = 0; i < keywords.size(); i++) {
+            movieString += keywords.get(i).getName() + ", ";
+        }
+        
+        return movieString;
+    }
 }

@@ -27,5 +27,10 @@ public class Request {
         this.customerId = customerId;
     }
 
+    @Override
+    public String toString() {
+        return "Request{" + "requestDate=" + requestDate + ", responseDate=" + responseDate + ", status=" + status + ", movieId=" + movieId + ", customerId=" + customerId + '}';
+    }
+
     
 }

@@ -38,6 +38,11 @@ public class Rental {
         
         returnDate = cal.getTime();
     }
+
+    @Override
+    public String toString() {
+        return "Rental{" + "rentDate=" + rentDate + ", returnDate=" + returnDate + ", status=" + status + ", dvdId=" + dvdId + ", customerId=" + customerId + ", reviewId=" + reviewId + '}';
+    }
     
 
     
