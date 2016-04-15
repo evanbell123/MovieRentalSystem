@@ -70,7 +70,7 @@ public class MovieRentalSystem {
 
             LinkedList<Actor> actors = new LinkedList<>();
             for (int j = 0; j < actorsPerMovie; j++) {
-                actors.add(allActors.get(i));
+                actors.add(allActors.get(j));
             }
 
             Collections.shuffle(allKeywords);
