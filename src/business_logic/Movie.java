@@ -38,7 +38,7 @@ public class Movie {
             if (i != actors.size() - 1) {
                 movieString += ", ";
             } else {
-                movieString += "] ";
+                movieString += "]";
             }
         }
 
@@ -49,7 +49,7 @@ public class Movie {
             if (i != keywords.size() - 1) {
                 movieString += ", ";
             } else {
-                movieString += "] ";
+                movieString += "]";
             }
         }
 
