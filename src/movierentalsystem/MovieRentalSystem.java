@@ -107,6 +107,7 @@ public class MovieRentalSystem {
                 if (dvdCount % lostDvdsRatio == 0) {
                     lost = true;
                 }
+                dvdCount++;
                 controller.addDVD(movies.get(i).getID(), lost);
             }
         }
@@ -114,6 +115,22 @@ public class MovieRentalSystem {
         LinkedList<Presentation> dvds = controller.getDVDs();
         
         print("Get all dvds", dvds);
+        
+        /*
+        Create test customer
+        */
+        
+        controller.addCustomer("random@email.com", "KCMO", "555-444-3333", "password", "Bob");
+        
+        LinkedList<Presentation> customers = controller.getCustomers();
+        
+        print("Get all customers", customers);
+        
+        controller.addRental(customers.getFirst().getID(), dvds.getLast().getID());
+        
+        customers = controller.getCustomers();
+        
+        print("Rent a dvd", customers);
         
     }
     

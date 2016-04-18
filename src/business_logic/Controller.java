@@ -93,9 +93,21 @@ public class Controller {
             allCustomers.put(uniqueID, new Customer(uniqueID, email, address, phone, password, name));
         }
     }
+    
+    public LinkedList<Presentation> getCustomers() {
+        LinkedList<Presentation> result = new LinkedList();
+        Iterator itr = allCustomers.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            result.add((Presentation) pair.getValue());
+        }
+        return result;
+    }
 
     public void addRental(String customerId, String dvdId) {
         Customer cust = allCustomers.get(customerId);
         cust.addRental(dvdId);
     }
+
+    
 }

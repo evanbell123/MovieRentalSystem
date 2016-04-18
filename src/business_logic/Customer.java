@@ -34,10 +34,27 @@ public class Customer implements Presentation{
     public void addRental(String dvdId) {
         rentals.add(new Rental(dvdId));
     }
-
+    
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", email=" + email + ", address=" + address + ", phone=" + phone + ", password=" + password + ", name=" + name + '}';
+        String customerString = "Customer{" + "id=" + id + ", email=" + email + ", address=" + address + ", phone=" + phone + ", password=" + password + ", name=" + name + ", rentals=[";
+        
+        if (rentals.isEmpty()) {
+            customerString += "]";
+        }
+
+        for (int i = 0; i < rentals.size(); i++) {
+            customerString += rentals.get(i).toString();
+            if (i != rentals.size() - 1) {
+                customerString += ", ";
+            } else {
+                customerString += "]";
+            }
+        }
+        
+        customerString += "}";
+
+        return customerString;
     }
 
     @Override

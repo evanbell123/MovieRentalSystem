@@ -34,7 +34,11 @@ public class Movie implements Presentation {
     @Override
     public String toString() {
         String movieString = "Movie{" + "rating=" + rating + ", genre=" + genre + ", year=" + year + ", name=" + name + ", actors=[";
-
+        
+        if (actors.isEmpty()) {
+            movieString += "]";
+        }
+        
         for (int i = 0; i < actors.size(); i++) {
             movieString += actors.get(i).getName();
             if (i != actors.size() - 1) {
@@ -45,6 +49,10 @@ public class Movie implements Presentation {
         }
 
         movieString += ", keywords=[";
+        
+        if (keywords.isEmpty()) {
+            movieString += "]";
+        }
 
         for (int i = 0; i < keywords.size(); i++) {
             movieString += keywords.get(i).getName();
