@@ -5,21 +5,17 @@
  */
 package movierentalsystem;
 
+import business_logic.Controller;
 import business_logic.Actor;
-import business_logic.Customer;
-import business_logic.DVD;
 import business_logic.Gender;
 import static business_logic.Gender.*;
-import static business_logic.Genre.*;
+import static business_logic.Genre.COMEDY;
 import business_logic.Keyword;
-import business_logic.Movie;
 import static business_logic.MovieRating.PG13;
+import business_logic.Presentation;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.UUID;
+import java.util.ListIterator;
 
 /**
  *
@@ -31,15 +27,8 @@ public class MovieRentalSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Controller controller = Controller.Instance();
         
-        /*
-        Create sample customers
-        */
-        Map customers = new HashMap();
-
-        customers.put(1, new Customer("random@email.com", "KCMO", "555-444-3333", "password", "Bob"));
-        customers.put(2, new Customer("email@random.com", "KCMO", "456-444-3333", "password", "Mary"));
-
         /*
         Generate sample actors
         */
@@ -74,8 +63,6 @@ public class MovieRentalSystem {
         int actorsPerMovie = 4;
         int keywordsPerMovie = 3;
 
-        Map movies = new HashMap();
-
         for (int i = 0; i < totalMovies; i++) {
 
             Collections.shuffle(allActors);
@@ -93,42 +80,20 @@ public class MovieRentalSystem {
                 keywords.add(allKeywords.get(k));
             }
 
-            movies.put(i, new Movie(PG13, COMEDY, 2012, "movie name " + Integer.toString(i), actors, keywords));
-        }
-
-        Iterator movieIterator = movies.entrySet().iterator();
-        printMap(movieIterator);
-        
-        /*
-        Generate sample DVD's
-        */
-        int dvdsPerMovie = 10;
-        int lostDvdsRatio = 20; //1 lost dvd for every 20
-        
-        int dvdCount = 0;
-        
-        Map dvds = new HashMap();
-        
-        for (int i = 0; i < totalMovies; i++) {
-            for (int j = 0; j < dvdsPerMovie; j++) {
-                Boolean lost = false;
-                if (dvdCount % lostDvdsRatio == 0) {
-                    lost = true;
-                }
-                dvds.put(dvdCount, new DVD(UUID.randomUUID().toString(), lost, i));
-                dvdCount++;
-            }
+            controller.addMovie(PG13, COMEDY, 2012, "movie name " + Integer.toString(i), actors, keywords);
         }
         
-        Iterator dvdIterator = dvds.entrySet().iterator();
-        printMap(dvdIterator);
+        LinkedList<Presentation> movies = controller.getMovies();
+        
+        printList(movies);
+        
     }
     
-    private static void printMap(Iterator it) {
+    private static void printList(LinkedList<Presentation> list) {
+        ListIterator<Presentation> it = list.listIterator();
+        
         while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue().toString());
-            it.remove(); // avoids a ConcurrentModificationException
+            System.out.println(it.next());
         }
     }
 

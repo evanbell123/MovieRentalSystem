@@ -16,21 +16,24 @@ import java.util.GregorianCalendar;
  */
 public class Rental {
     private Date rentDate;
-    private Date returnDate;
+    private final Date returnDate;
     private RentalStatus status;
+    private final double charge;
+    private static final double standardPrice = 2.0;
+    private static final double feePerLateDay = 0.1;
     
-    private final int dvdId;
-    private final int customerId;
-    private final int reviewId;
+    
+    private final String dvdId;
+    private final String reviewId;
 
-    public Rental(int dvdId, int customerId, int reviewId) {
+    public Rental(String dvdId) {
         this.dvdId = dvdId;
-        this.customerId = customerId;
-        this.reviewId = reviewId;
+        reviewId = null;
+        
+        charge = standardPrice;
         
         rentDate = new Date();
         
-        //GregorianCalendar cal = new GregorianCalendar();
         Calendar cal = GregorianCalendar.getInstance();
         rentDate = cal.getTime();
         
@@ -41,10 +44,6 @@ public class Rental {
 
     @Override
     public String toString() {
-        return "Rental{" + "rentDate=" + rentDate + ", returnDate=" + returnDate + ", status=" + status + ", dvdId=" + dvdId + ", customerId=" + customerId + ", reviewId=" + reviewId + '}';
+        return "Rental{" + "rentDate=" + rentDate + ", returnDate=" + returnDate + ", status=" + status + ", charge=" + charge + ", dvdId=" + dvdId + ", reviewId=" + reviewId + '}';
     }
-    
-
-    
-    
 }

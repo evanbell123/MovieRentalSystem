@@ -11,8 +11,9 @@ import java.util.LinkedList;
  *
  * @author evanb
  */
-public class Movie {
-
+public class Movie implements Presentation {
+    
+    private final String id;
     private final MovieRating rating;
     private final Genre genre;
     private final int year;
@@ -20,7 +21,8 @@ public class Movie {
     private final LinkedList<Actor> actors;
     private final LinkedList<Keyword> keywords;
 
-    public Movie(MovieRating rating, Genre genre, int year, String name, LinkedList<Actor> actors, LinkedList<Keyword> keywords) {
+    public Movie(String id, MovieRating rating, Genre genre, int year, String name, LinkedList<Actor> actors, LinkedList<Keyword> keywords) {
+        this.id = id;
         this.rating = rating;
         this.genre = genre;
         this.year = year;
@@ -54,5 +56,10 @@ public class Movie {
         }
 
         return movieString;
+    }
+
+    @Override
+    public String getID() {
+        return id;
     }
 }

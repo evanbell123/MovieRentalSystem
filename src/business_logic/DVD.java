@@ -9,13 +9,13 @@ package business_logic;
  *
  * @author evanb
  */
-public class DVD {
+public class DVD implements Presentation{
     private final String serialNo;
     private final Boolean lost;
     
-    private int movieId;
+    private final String movieId;
 
-    public DVD(String serialNo, Boolean lost, int movieId) {
+    public DVD(String serialNo, String movieId, Boolean lost) {
         this.serialNo = serialNo;
         this.lost = lost;
         this.movieId = movieId;
@@ -24,6 +24,11 @@ public class DVD {
     @Override
     public String toString() {
         return "DVD{" + "serialNo=" + serialNo + ", lost=" + lost + ", movieId=" + movieId + '}';
+    }
+
+    @Override
+    public String getID() {
+        return serialNo;
     }
 
     
