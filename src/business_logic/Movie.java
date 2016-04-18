@@ -54,6 +54,8 @@ public class Movie implements Presentation {
                 movieString += "]";
             }
         }
+        
+        movieString += "}";
 
         return movieString;
     }

@@ -85,16 +85,47 @@ public class MovieRentalSystem {
         
         LinkedList<Presentation> movies = controller.getMovies();
         
-        printList(movies);
+        print("Initial Movies", movies);
+        
+        controller.deleteMovie(movies.getLast().getID());
+        
+        movies = controller.getMovies();
+        
+        print("Delete the last movie", movies);
+        
+        /*
+        Generate sample DVD's
+        */
+        int dvdsPerMovie = 10;
+        int lostDvdsRatio = 20; //1 lost dvd for every 20
+        
+        int dvdCount = 0;
+        
+        for (int i = 0; i < movies.size(); i++) {
+            for (int j = 0; j < dvdsPerMovie; j++) {
+                Boolean lost = false;
+                if (dvdCount % lostDvdsRatio == 0) {
+                    lost = true;
+                }
+                controller.addDVD(movies.get(i).getID(), lost);
+            }
+        }
+        
+        LinkedList<Presentation> dvds = controller.getDVDs();
+        
+        print("Get all dvds", dvds);
         
     }
     
-    private static void printList(LinkedList<Presentation> list) {
+    private static void print(String description, LinkedList<Presentation> list) {
+        System.out.println(description + "\n");
+        
         ListIterator<Presentation> it = list.listIterator();
         
         while (it.hasNext()) {
             System.out.println(it.next());
         }
+        System.out.println();
     }
 
 }
