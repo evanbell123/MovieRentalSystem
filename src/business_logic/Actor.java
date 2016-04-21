@@ -9,7 +9,7 @@ package business_logic;
  *
  * @author evanb
  */
-public class Actor {
+public class Actor implements Searchable {
     private final String name;
     private final Gender gender;
 
@@ -20,6 +20,11 @@ public class Actor {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean contains(String text) {
+        return name.contains(text);
     }
     
 }

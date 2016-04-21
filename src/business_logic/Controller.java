@@ -108,6 +108,67 @@ public class Controller {
         Customer cust = allCustomers.get(customerId);
         cust.addRental(dvdId);
     }
+    
+    public LinkedList<Presentation> searchMovies(String text){
+        LinkedList<Presentation> result = new LinkedList();
+        Iterator itr = allMovies.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            Searchable movie = (Searchable) pair.getValue();
+            if ( movie.contains(text)){
+                result.add((Presentation) pair.getValue());
+            }
+            
+        }
+        return result;
+    }
+    /*
+        check if DVD with matching movieid is not lost
+        return dvdID of available dvd
+    */
+    private String findDVDForMovie(String movieId){
+      Iterator itr = allDVDs.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            DVD tempDVD = (DVD) pair.getValue();
+            String tempMovieId = tempDVD.getMovieId();
+            if ( tempMovieId.equals(movieId) && !tempDVD.Lost() ){
+                return tempDVD.getID();
+            }
+        }   
+        return "NODVD";
+    }
+    
+    /*
+        Check if any customers currently have this dvdId in there rented list
+    */
+    private boolean dvdIsRented(String dvdId){
+        Iterator itr = allCustomers.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            Customer theCustomer = (Customer) pair.getValue();
+            if ( theCustomer.hasRentedDVD(dvdId)){
+                return true; 
+            }
+        }
+        return false;
+    }
+    
+    //Check and see if a movie has a dvd available
+    public String dvdIsAvailable(String movieId){
+        //check if there exists a dvd that is not lost for movieId
+        String dvdId = findDVDForMovie(movieId);  
+        if ( dvdId.equals("NODVD") )
+            return "NOTAVAILABLE";
+        
+        //now check is the this dvdId has been rented already
+        if ( dvdIsRented(dvdId) )
+            return "NOTAVAILABLE";
+        
+        //dvd is availabe return the dvdID
+        return dvdId;
+        
+    }
 
     
 }

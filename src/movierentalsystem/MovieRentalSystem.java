@@ -11,6 +11,7 @@ import business_logic.Gender;
 import static business_logic.Gender.*;
 import static business_logic.Genre.COMEDY;
 import business_logic.Keyword;
+import business_logic.Movie;
 import static business_logic.MovieRating.PG13;
 import business_logic.Presentation;
 import java.util.Collections;
@@ -132,6 +133,29 @@ public class MovieRentalSystem {
         
         print("Rent a dvd", customers);
         
+        LinkedList<Presentation> matchedMovies = controller.searchMovies("keyword17");
+        
+        print("Searched for Keyword17", matchedMovies);
+        
+        LinkedList<Presentation> matchedMovies2 = controller.searchMovies("actor");
+        
+        print("Searched for 'actor'", matchedMovies2);
+      
+        //Simulate Customer Checking if Movie is available
+        //then let customer rent if available
+        String theMovieId = matchedMovies2.getFirst().getID();
+        if ( !controller.dvdIsAvailable(theMovieId).equals("NOTAVAILABLE") ){
+            // Yeah! movie is available to rent
+            controller.addRental(customers.getFirst().getID(), dvds.getLast().getID());
+            System.out.println("Rental Successful" + customers.getFirst() );
+        } 
+        else {
+            System.out.println("Movie was not available, customer is requesting");
+            //darn! movie is either rented or lost
+            //but you can request it
+        }
+        
+     
     }
     
     private static void print(String description, LinkedList<Presentation> list) {
