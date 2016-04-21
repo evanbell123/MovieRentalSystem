@@ -37,7 +37,9 @@ public class Customer implements Presentation{
     
     @Override
     public String toString() {
-        String customerString = "Customer{" + "id=" + id + ", email=" + email + ", address=" + address + ", phone=" + phone + ", password=" + password + ", name=" + name + ", rentals=[";
+        String customerString = "Customer{" + "id=" + id + ", email=" + email +
+                ", address=" + address + ", phone=" + phone + ", password=" + 
+                password + ", name=" + name + ", rentals=[";
         
         if (rentals.isEmpty()) {
             customerString += "]";
@@ -62,5 +64,15 @@ public class Customer implements Presentation{
         return id;
     }
 
+    /*
+        Returns true if movie has been rented 
+    */
+    public boolean hasRentedDVD(String dvdId){
+        for (Rental theRental: rentals){
+            if ( theRental.getID().equals(dvdId))
+                return true;
+        }
+        return false;
+    }
     
 }

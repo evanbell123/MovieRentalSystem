@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
  *
  * @author evanb
  */
-public class Rental {
+public class Rental implements Presentation {
     private Date rentDate;
     private final Date returnDate;
     private RentalStatus status;
@@ -45,6 +45,13 @@ public class Rental {
 
     @Override
     public String toString() {
-        return "Rental{" + "rentDate=" + rentDate + ", returnDate=" + returnDate + ", status=" + status + ", charge=" + charge + ", dvdId=" + dvdId + ", reviewId=" + reviewId + '}';
+        return "Rental{" + "rentDate=" + rentDate + ", returnDate=" + returnDate
+                + ", status=" + status + ", charge=" + charge + ", dvdId=" 
+                + dvdId + ", reviewId=" + reviewId + '}';
+    }
+
+    @Override
+    public String getID() {
+        return dvdId;
     }
 }

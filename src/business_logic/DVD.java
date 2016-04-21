@@ -21,6 +21,15 @@ public class DVD implements Presentation{
         this.movieId = movieId;
     }
 
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public Boolean Lost() {
+        return lost;
+    }
+    
+
     @Override
     public String toString() {
         return "DVD{" + "serialNo=" + serialNo + ", lost=" + lost + ", movieId=" + movieId + '}';
