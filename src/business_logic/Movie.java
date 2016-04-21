@@ -98,6 +98,9 @@ public class Movie implements Presentation, Searchable {
         return ( 
                 name.contains(text) || id.contains(text)
                 || searchActors(text) || searchKeywords(text)
+                || genre.toString().contains(text)
+                || rating.toString().contains(text)
+                || Integer.toString(year).contains(text)
                );
     }
 }

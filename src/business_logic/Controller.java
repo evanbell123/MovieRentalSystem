@@ -104,9 +104,9 @@ public class Controller {
         return result;
     }
 
-    public void addRental(String customerId, String dvdId) {
+    public void addRental(String customerId, String dvdId, RentalPickup pickup) {
         Customer cust = allCustomers.get(customerId);
-        cust.addRental(dvdId);
+        cust.addRental(dvdId, pickup);
     }
     
     public LinkedList<Presentation> searchMovies(String text){

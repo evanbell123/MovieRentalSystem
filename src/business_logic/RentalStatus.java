@@ -10,5 +10,5 @@ package business_logic;
  * @author evanb
  */
 public enum RentalStatus {
-    
+    RENTED, RETURNED, EXTENDED
 }

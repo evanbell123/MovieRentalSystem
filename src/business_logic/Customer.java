@@ -31,8 +31,8 @@ public class Customer implements Presentation{
         this.rentals = new LinkedList<>();
     }
     
-    public void addRental(String dvdId) {
-        rentals.add(new Rental(dvdId));
+    public void addRental(String dvdId, RentalPickup pickup) {
+        rentals.add(new Rental(dvdId, pickup));
     }
     
     @Override
