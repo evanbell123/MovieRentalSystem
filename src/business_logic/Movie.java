@@ -11,7 +11,7 @@ import java.util.LinkedList;
  *
  * @author evanb
  */
-public class Movie implements Presentation {
+public class Movie implements Presentation, Searchable {
     
     private final String id;
     private final MovieRating rating;
@@ -71,5 +71,33 @@ public class Movie implements Presentation {
     @Override
     public String getID() {
         return id;
+    }
+    
+    private boolean searchActors(String text){
+        for(Actor theActor: actors){
+            if (theActor.contains(text))
+                return true;
+        }
+        return false;
+    }
+    
+     private boolean searchKeywords(String text){
+        for(Keyword thekeyWord: keywords){
+            if (thekeyWord.contains(text))
+                return true;
+        }
+        return false;
+    }
+
+     /*
+        If any private variables of Movie including Actors list and Keyword list
+        contain search text, return true
+     */
+    @Override
+    public boolean contains(String text) {
+        return ( 
+                name.contains(text) || id.contains(text)
+                || searchActors(text) || searchKeywords(text)
+               );
     }
 }

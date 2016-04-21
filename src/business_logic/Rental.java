@@ -26,6 +26,7 @@ public class Rental {
     private final String dvdId;
     private final String reviewId;
 
+
     public Rental(String dvdId) {
         this.dvdId = dvdId;
         reviewId = null;

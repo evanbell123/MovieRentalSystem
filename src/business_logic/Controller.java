@@ -108,6 +108,20 @@ public class Controller {
         Customer cust = allCustomers.get(customerId);
         cust.addRental(dvdId);
     }
+    
+    public LinkedList<Presentation> searchMovies(String text){
+        LinkedList<Presentation> result = new LinkedList();
+        Iterator itr = allMovies.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            Searchable movie = (Searchable) pair.getValue();
+            if ( movie.contains(text)){
+                result.add((Presentation) pair.getValue());
+            }
+            
+        }
+        return result;
+    }
 
     
 }

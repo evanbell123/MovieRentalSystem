@@ -9,7 +9,7 @@ package business_logic;
  *
  * @author evanb
  */
-public class Keyword {
+public class Keyword implements Searchable {
     private String name;
 
     public Keyword(String name) {
@@ -18,5 +18,10 @@ public class Keyword {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean contains(String text) {
+        return name.contains(text);
     }
 }

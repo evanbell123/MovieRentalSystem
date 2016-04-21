@@ -132,6 +132,13 @@ public class MovieRentalSystem {
         
         print("Rent a dvd", customers);
         
+        LinkedList<Presentation> matchedMovies = controller.searchMovies("keyword17");
+        
+        print("Searched for Keyword17", matchedMovies);
+        
+        LinkedList<Presentation> matchedMovies2 = controller.searchMovies("actor");
+        
+        print("Searched for 'actor'", matchedMovies2);
     }
     
     private static void print(String description, LinkedList<Presentation> list) {
