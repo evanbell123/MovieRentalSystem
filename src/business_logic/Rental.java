@@ -18,8 +18,8 @@ import java.util.GregorianCalendar;
 public class Rental implements Presentation {
     private Date rentDate;
     private final Date returnDate;
-    private RentalStatus status;
-    private RentalPickup pickup;
+    private final RentalStatus status;
+    private final RentalPickup pickup;
     private final double charge;
     private static final double standardPrice = 2.0;
     private static final double feePerLateDay = 0.1;

@@ -16,6 +16,8 @@ import business_logic.MovieRating;
 import static business_logic.MovieRating.*;
 import business_logic.Presentation;
 import static business_logic.RentalPickup.*;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -206,7 +208,37 @@ public class MovieRentalSystem {
             System.out.println("Movie was not available, customer is requesting");
             //darn! movie is either rented or lost
             //but you can request it
+            controller.addRequest(theMovieId, customers.getFirst().getID());
+            //print("Request unavailable movie", allRequests);
         }
+        
+        /*
+        Test rentals and requests
+        */
+        controller.addMovie(G, DRAMA, maxYear, "1", allActors, allKeywords);
+        
+        /*
+        Add an unavailable DVD
+        */
+        controller.addDVD("1", TRUE);
+        
+        if (!controller.dvdIsAvailable("1").equals("NOTAVAILABLE")) {
+            // Yeah! movie is available to rent
+            controller.addRental(customers.getFirst().getID(), "1", MAIL);
+            System.out.println("Rental Successful \n" + customers.getFirst());
+        } else {
+            System.out.println("Movie was not available, customer is requesting");
+            //darn! movie is either rented or lost
+            //but you can request it
+            controller.addRequest("1", customers.getFirst().getID());
+            //print("Request unavailable movie", allRequests);
+        }
+        
+        print("add request for unavaiable DVD", controller.getRequests());
+        
+        
+        System.out.println();
+        
 
     }
 

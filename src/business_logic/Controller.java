@@ -8,7 +8,6 @@ package business_logic;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -22,6 +21,9 @@ public class Controller {
 
     private final LinkedList<Actor> allActors;
     private final LinkedList<Keyword> allKeywords;
+    
+    private Map<String, Request> allRequests;
+    
     private final Map<String, Movie> allMovies;
     private final Map<String, DVD> allDVDs;
     private final Map<String, Customer> allCustomers;
@@ -29,6 +31,8 @@ public class Controller {
     private Controller() {
         allActors = new LinkedList<>();
         allKeywords = new LinkedList<>();
+        
+        allRequests = new HashMap();
         allMovies = new HashMap();
         allDVDs = new HashMap();
         allCustomers = new HashMap();
@@ -61,13 +65,7 @@ public class Controller {
     }
 
     public LinkedList<Presentation> getMovies() {
-        LinkedList<Presentation> result = new LinkedList();
-        Iterator itr = allMovies.entrySet().iterator();
-        while (itr.hasNext()) {
-            Map.Entry pair = (Map.Entry) itr.next();
-            result.add((Presentation) pair.getValue());
-        }
-        return result;
+        return mapToList(allMovies);
     }
 
     public void addDVD(String movieId, Boolean lost) {
@@ -78,13 +76,7 @@ public class Controller {
     }
 
     public LinkedList<Presentation> getDVDs() {
-        LinkedList<Presentation> result = new LinkedList();
-        Iterator itr = allDVDs.entrySet().iterator();
-        while (itr.hasNext()) {
-            Map.Entry pair = (Map.Entry) itr.next();
-            result.add((Presentation) pair.getValue());
-        }
-        return result;
+        return mapToList(allDVDs);
     }
 
     public void addCustomer(String email, String address, String phone, String password, String name) {
@@ -95,19 +87,26 @@ public class Controller {
     }
     
     public LinkedList<Presentation> getCustomers() {
-        LinkedList<Presentation> result = new LinkedList();
-        Iterator itr = allCustomers.entrySet().iterator();
-        while (itr.hasNext()) {
-            Map.Entry pair = (Map.Entry) itr.next();
-            result.add((Presentation) pair.getValue());
-        }
-        return result;
+        return mapToList(allCustomers);
     }
 
     public void addRental(String customerId, String dvdId, RentalPickup pickup) {
         Customer cust = allCustomers.get(customerId);
         cust.addRental(dvdId, pickup);
     }
+    
+    public void addRequest(String movieId, String customerId) {
+        
+        String uniqueID = UUID.randomUUID().toString();
+        if (!this.allRequests.containsKey(uniqueID)) {
+            allRequests.put(uniqueID, new Request(uniqueID, movieId, customerId));
+        }
+    }
+    
+    public LinkedList<Presentation> getRequests() {
+        return mapToList(allRequests);
+    }
+    
     
     public LinkedList<Presentation> searchMovies(String text){
         LinkedList<Presentation> result = new LinkedList();
@@ -168,6 +167,16 @@ public class Controller {
         //dvd is availabe return the dvdID
         return dvdId;
         
+    }
+    
+    private static LinkedList<Presentation> mapToList(Map map) {
+        LinkedList<Presentation> result = new LinkedList();
+        Iterator itr = map.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            result.add((Presentation) pair.getValue());
+        }
+        return result;
     }
 
     
