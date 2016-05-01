@@ -4,6 +4,8 @@ import static business_logic.RentalStatus.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +20,7 @@ import java.util.GregorianCalendar;
 public class Rental implements Presentation {
     private Date rentDate;
     private final Date returnDate;
-    private final RentalStatus status;
+    private RentalStatus status;
     private final RentalPickup pickup;
     private final double charge;
     private static final double standardPrice = 2.0;
@@ -48,6 +50,23 @@ public class Rental implements Presentation {
         
         returnDate = cal.getTime();
     }
+    /*
+    returns 0 if no fees
+    returns val > 0 if there are fees
+    */
+    public double returnDVD(Date actualReturnDate){
+        status = RentalStatus.RETURNED;
+        if (actualReturnDate.before(returnDate)){
+            return 0;
+        } else { //convert Date => Calendar and calc day difference
+         int days = DaysBetween.daysBetween(DaysBetween.DateToCalendar(actualReturnDate),
+                 DaysBetween.DateToCalendar(returnDate));
+         
+         return days * feePerLateDay;
+        }
+        
+        
+    }
 
     @Override
     public String toString() {
@@ -58,4 +77,6 @@ public class Rental implements Presentation {
     public String getID() {
         return dvdId;
     }
+    
+  
 }

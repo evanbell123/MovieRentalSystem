@@ -5,6 +5,7 @@
  */
 package business_logic;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -73,6 +74,19 @@ public class Customer implements Presentation{
                 return true;
         }
         return false;
+    }
+    
+    /*
+        return amount of late fees 
+        or -1 if rental cannot be found 
+    */
+    public double returnDvd(String dvdId, Date returnDate){
+        for (Rental rental: rentals){
+            if (rental.getID().equals(dvdId)){
+                return rental.returnDVD(returnDate);
+            }
+        }
+        return -1;
     }
     
 }
