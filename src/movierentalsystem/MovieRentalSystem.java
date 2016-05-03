@@ -18,7 +18,9 @@ import business_logic.Presentation;
 import static business_logic.RentalPickup.*;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.concurrent.ThreadLocalRandom;
@@ -195,10 +197,12 @@ public class MovieRentalSystem {
 
         LinkedList<Presentation> matchedMovies10 = controller.searchMovies("actor");
 
-        print("Searched for 'actor'", matchedMovies10);
-
-        //Simulate Customer Checking if Movie is available
-        //then let customer rent if available
+        print("Searched for 'actor'", matchedMovies10); 
+        
+        /*
+         Simulate Customer Checking if Movie is available
+         then let customer rent if available 
+        */
         String theMovieId = matchedMovies10.getFirst().getID();
         if (!controller.dvdIsAvailable(theMovieId).equals("NOTAVAILABLE")) {
             // Yeah! movie is available to rent
@@ -239,7 +243,26 @@ public class MovieRentalSystem {
         
         System.out.println();
         
+        /*
+         Test return of dvd with and without rental fees 
+        */   
+        String dvdIdToReturn = dvds.getLast().getID();
+        Calendar cal = GregorianCalendar.getInstance();
+        
+        double fees = controller.returnDVD(dvdIdToReturn, cal.getTime());
+        System.out.println("DVD with id " + dvdIdToReturn + 
+                " returned. There were $" + fees + " in fees charged.");
 
+        System.out.println("Testing dvd return with late fees");
+        cal.add(Calendar.DAY_OF_MONTH, 100);
+        double fees2 = controller.returnDVD(dvdIdToReturn, cal.getTime());
+        System.out.println("DVD with id " + dvdIdToReturn + 
+                " returned. There were $" + fees2 + " in fees charged.");
+        
+
+
+        
+        
     }
 
     private static void print(String description, LinkedList<Presentation> list) {

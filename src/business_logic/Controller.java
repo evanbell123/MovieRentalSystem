@@ -10,6 +10,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -153,6 +156,25 @@ public class Controller {
         return false;
     }
     
+      /*
+        Given a dvd id find the rental
+        find customer with dvd and mark it has returned
+        check dates of return 
+        return amount of fees
+    */
+    public double returnDVD(String dvdId, Date returnDate){
+        Iterator itr = allCustomers.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry pair = (Map.Entry) itr.next();
+            Customer theCustomer = (Customer) pair.getValue();
+            if (theCustomer.hasRentedDVD(dvdId)){
+                return theCustomer.returnDvd(dvdId, returnDate);
+            }
+
+        }
+        return -1; 
+    }
+    
     //Check and see if a movie has a dvd available
     public String dvdIsAvailable(String movieId){
         //check if there exists a dvd that is not lost for movieId
@@ -178,6 +200,8 @@ public class Controller {
         }
         return result;
     }
+    
+  
 
     
 }
